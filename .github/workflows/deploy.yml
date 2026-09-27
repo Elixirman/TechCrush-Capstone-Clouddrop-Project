@@ -1,0 +1,57 @@
+name: Build, test and deploy CloudDrop
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # TODO(Member D): add real tests under a tests/ folder and run them here, e.g.:
+      # - name: Run tests
+      #   run: pytest
+
+      - name: Health check import sanity test
+        run: python -c "from app import create_app; create_app()"
+
+  deploy:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # TODO(Member D): configure deployment to EC2 over SSH.
+      # 1. Store the EC2 SSH private key as a GitHub secret: EC2_SSH_KEY
+      # 2. Store the EC2 public IP/host as a secret: EC2_HOST
+      # 3. Uncomment and adapt the step below.
+      #
+      # - name: Deploy to EC2
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     username: ubuntu
+      #     key: ${{ secrets.EC2_SSH_KEY }}
+      #     script: |
+      #       cd /home/ubuntu/clouddrop
+      #       git pull origin main
+      #       source venv/bin/activate
+      #       pip install -r requirements.txt
+      #       sudo systemctl restart clouddrop
+      #       curl -f http://localhost:5000/health
+
+      - name: Placeholder — replace with real deploy step above
+        run: echo "TODO(Member D) - wire up EC2 deploy"
