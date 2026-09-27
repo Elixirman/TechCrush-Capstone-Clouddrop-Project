@@ -26,6 +26,8 @@ jobs:
 
       - name: Health check import sanity test
         run: python -c "from app import create_app; create_app()"
+        env:
+          DATABASE_URL: "sqlite:///test.db"
 
   deploy:
     needs: build-and-test
