@@ -29,6 +29,7 @@ See `.env.example`. Never commit a real `.env` file (it's already git-ignored).
 | B | S3 upload/download logic (`app/upload.py`) | `feature/s3-upload` |
 | C | RDS models + auth (`app/models.py`, `app/auth.py`) | `feature/rds-metadata-auth` |
 | D | CI/CD + sharing links (`.github/workflows/deploy.yml`) | `feature/cicd-sharing-links` |
+| E | Browser UI (`app/ui.py`, templates, static files) | `feature/ui` |
 
 Each file with a `# TODO(Member X):` comment is that member's task. Don't edit another member's TODO file — open an issue instead if something needs to change.
 
