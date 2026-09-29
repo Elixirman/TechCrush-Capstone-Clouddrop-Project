@@ -1,9 +1,8 @@
+from flask_login import UserMixin
 from app import db
 
-# TODO(Member C): flesh out these models and run migrations against RDS.
 
-
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
